@@ -1,0 +1,32 @@
+import random
+import string
+
+# Function to generate a random password
+def generate_password(length):
+    if length < 4:
+        return "Error: Password length must be at least 4 characters."
+    
+    # Define character sets
+    lowercase = string.ascii_lowercase
+    uppercase = string.ascii_uppercase
+    digits = string.digits
+    special_chars = string.punctuation
+
+    # Ensure password contains at least one of each character type
+    all_chars = lowercase + uppercase + digits + special_chars
+    password = random.choice(lowercase) + random.choice(uppercase) + random.choice(digits) + random.choice(special_chars)
+
+    # Generate the remaining characters randomly
+    password += ''.join(random.choices(all_chars, k=length-4))
+
+    # Shuffle the password to make it random
+    password = ''.join(random.sample(password, len(password)))
+
+    return password
+
+# Get user input for password length
+length = int(input("Enter the desired password length: "))
+
+# Generate and display the password
+password = generate_password(length)
+print(f"Generated Password: {password}")
